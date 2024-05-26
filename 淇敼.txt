@@ -1,0 +1,12 @@
+
+2.在common.py中加入了 C2f CspStage  SPPFCSPC  Bifpn 
+
+C3_CA是在C3的基础上加入 CA注意力机制, Conv_CA注意力机制
+C33x3, C33x3_CA 
+
+ #自己加的
+torch.use_deterministic_algorithms(False)
+scaler.scale(loss).backward()
+
+
+

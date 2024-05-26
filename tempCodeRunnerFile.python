@@ -1,0 +1,28 @@
+import os
+
+# 文件夹路径
+labels_path = r'E:\yolov5_cell_detect\datasets\CELL\CELL\cell_1360x1024\labels\val'
+
+# 遍历标注文件
+for label_file in os.listdir(labels_path):
+    if label_file.endswith('.txt'):  # 确保只处理txt文件
+        file_path = os.path.join(labels_path, label_file)
+        with open(file_path, 'r') as file:
+            lines = file.readlines()
+
+        # 修改类索引
+        new_lines = []
+        for line in lines:
+            parts = line.strip().split()
+            class_idx = int(parts[0])
+            if class_idx == 0:  # 将class为0的修改为1
+                parts[0] = '1'
+            elif class_idx == 1:  # 如果有背景类索引为1则不变
+                parts[0] = '0'
+            new_lines.append(' '.join(parts) + '\n')
+
+        # 写回修改后的标注文件
+        with open(file_path, 'w') as file:
+            file.writelines(new_lines)
+
+print('标注文件修改完成！')
